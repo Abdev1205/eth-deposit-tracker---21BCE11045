@@ -1,0 +1,46 @@
+version: "3.7"
+
+services:
+  grafana:
+    build:
+      context: .
+      dockerfile: Dockerfile.grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - TELEGRAM_BOT_TOKEN=7396106658:AAEnYLW1q79hLRMJMR5wGsdL3NE-b8jR610
+      - TELEGRAM_CHAT_ID=1303314590
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+  prometheus:
+    build:
+      context: .
+      dockerfile: Dockerfile.prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus_data:/prometheus
+
+  tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile.tracker
+    ports:
+      - "4000:4000"
+    depends_on:
+      - grafana
+      - prometheus
+    environment:
+      - DATABASE_URL=mongodb+srv://abhay:abhay@cluster0.qcmys.mongodb.net/shortener?retryWrites=true&w=majority&appName=Cluster0
+      - NOTIFICATION_SERVICE_URL=http://localhost:3000/api/notifications
+      - ALCHEMY_API_KEY=HU2rAio3sUA0zJ1taRkvPAQGYGRXqlCE
+      - BEACON_DEPOSIT_CONTRACT=0x00000000219ab540356cBB839Cbe05303d7705Fa
+      - TELEGRAM_BOT_TOKEN=7396106658:AAEnYLW1q79hLRMJMR5wGsdL3NE-b8jR610
+      - TELEGRAM_CHAT_ID=1303314590
+
+volumes:
+  grafana_data:
+  prometheus_data:

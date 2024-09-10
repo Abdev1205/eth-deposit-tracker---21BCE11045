@@ -1,0 +1,14 @@
+# Use the official Grafana image from Docker Hub
+FROM grafana/grafana:latest
+
+# Expose Grafana's default port
+EXPOSE 3000
+
+# Copy provisioning files
+COPY grafana/provisioning /etc/grafana/provisioning
+
+# Copy dashboards
+COPY grafana/provisioning/dashboards /var/lib/grafana/dashboards
+
+# Start Grafana
+CMD ["/run.sh"]

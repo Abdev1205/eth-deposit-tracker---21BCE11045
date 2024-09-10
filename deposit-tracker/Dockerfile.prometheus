@@ -1,0 +1,8 @@
+# Use the official Prometheus image from Docker Hub
+FROM prom/prometheus:latest
+
+# Copy the Prometheus configuration file into the container
+COPY grafana/prometheus.yml /etc/prometheus/prometheus.yml
+
+# Set the Prometheus configuration file
+CMD [ "--config.file=/etc/prometheus/prometheus.yml" ]
