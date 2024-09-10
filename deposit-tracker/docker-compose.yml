@@ -8,8 +8,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - TELEGRAM_BOT_TOKEN=7396106658:AAEnYLW1q79hLRMJMR5wGsdL3NE-b8jR610
-      - TELEGRAM_CHAT_ID=1303314590
+      - TELEGRAM_BOT_TOKEN=<your-telegram-bot-token>
+      - TELEGRAM_CHAT_ID=<your-telegram-chat-id>
     volumes:
       - grafana_data:/var/lib/grafana
     depends_on:
@@ -34,12 +34,12 @@ services:
       - grafana
       - prometheus
     environment:
-      - DATABASE_URL=mongodb+srv://abhay:abhay@cluster0.qcmys.mongodb.net/shortener?retryWrites=true&w=majority&appName=Cluster0
+      - DATABASE_URL=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
       - NOTIFICATION_SERVICE_URL=http://localhost:3000/api/notifications
-      - ALCHEMY_API_KEY=HU2rAio3sUA0zJ1taRkvPAQGYGRXqlCE
-      - BEACON_DEPOSIT_CONTRACT=0x00000000219ab540356cBB839Cbe05303d7705Fa
-      - TELEGRAM_BOT_TOKEN=7396106658:AAEnYLW1q79hLRMJMR5wGsdL3NE-b8jR610
-      - TELEGRAM_CHAT_ID=1303314590
+      - ALCHEMY_API_KEY=<your-alchemy-api-key>
+      - BEACON_DEPOSIT_CONTRACT=<your-contract-address></your-contract-address>
+      - TELEGRAM_BOT_TOKEN=<your-telegram-bot-token>
+      - TELEGRAM_CHAT_ID=<your-telegram-chat-id>
 
 volumes:
   grafana_data:
